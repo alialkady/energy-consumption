@@ -5,12 +5,10 @@ services:
     image: mysql:8.0
     volumes:
       - database-data:/var/lib/mysql
-    ports:  
+    ports:
       - 3307:3306
     environment:
-
       MYSQL_ROOT_PASSWORD: 123456
-  
 
   ed-pyspark-jupyter:
     image: jupyter/pyspark-notebook:spark-3.3.0
@@ -23,6 +21,7 @@ services:
       JUPYTER_PORT: 8889
       SPARK_UI_PORT: 4042
       GRANT_SUDO: yes
+      PYSPARK_SUBMIT_ARGS: "--packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0 pyspark-shell"
     volumes:
       - streaming_data:/data:rw
 
@@ -51,7 +50,7 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_CREATE_TOPICS: "raw:1:1"
+      KAFKA_CREATE_TOPICS: "accident-data:1:1"
 
 volumes:
   streaming_data:
