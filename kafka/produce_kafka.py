@@ -3,7 +3,7 @@ import pandas as pd
 from energy_consumption import data_filtered
 #kafka configuration
 kafka_broker = 'ed-kafka:9092'
-topic_name = 'smart_home'
+topic_name = 'smart-home'
 
 #initialize producer
 producer = KafkaProducer(bootstrap_servers=kafka_broker)
