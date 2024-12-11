@@ -32,4 +32,5 @@ coulmn_rename = {
 }
 data_filtered = data_filtered.rename(columns = coulmn_rename)
 
-print(data_filtered)
+data_filtered_10 = data_filtered.iloc[:10]
+print(data_filtered_10)

@@ -1,6 +1,8 @@
 from kafka import KafkaProducer
 import json
-from energy_consumption import data_filtered_10
+import time
+from energy_consumption import data_filtered
+
 # Kafka configuration
 kafka_broker = 'ed-kafka:29092'
 topic_name = 'smart-home'
@@ -11,7 +13,7 @@ producer = KafkaProducer(
     value_serializer=lambda value: value.encode('utf-8')
 )
 
-# Function to send data from the DataFrame to Kafka
+# Function to send data from the DataFrame to Kafka at a pace of one message per second
 def send_messages_from_dataframe(df, topic):
     if df.empty:
         print("The DataFrame is empty. No messages to send.")
@@ -23,12 +25,13 @@ def send_messages_from_dataframe(df, topic):
             message = json.dumps(row.to_dict())
             producer.send(topic, value=message)
             print(f"Sent: {message}")
+            time.sleep(1)  # Wait for 1 second before sending the next message
         except Exception as e:
             print(f"Error sending message at index {index}: {e}")
 
-# Send data from data_filtered_10 DataFrame
+# Send data from data_filtered DataFrame
 print("Starting to send messages...")
-send_messages_from_dataframe(data_filtered_10, topic_name)
+send_messages_from_dataframe(data_filtered, topic_name)
 
 # Close the producer
 producer.close()
