@@ -3,7 +3,7 @@ from pyspark.sql.functions import from_json, col, sum as spark_sum
 import mysql.connector
 from pyspark.sql.types import StructType, StructField, DoubleType, StringType
 # Initialize Spark session
-spark = SparkSession.builder.appName("KafkaSparkStreamingSum").getOrCreate()
+spark = SparkSession.builder.appName("energy_consumption").getOrCreate()
 
 # Define the schema for the incoming JSON data
 schema = StructType([

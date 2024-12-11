@@ -15,24 +15,20 @@ producer = KafkaProducer(
 
 # Function to send data from the DataFrame to Kafka at a pace of one message per second
 def send_messages_from_dataframe(df, topic):
-    if df.empty:
-        print("The DataFrame is empty. No messages to send.")
-        return
-    
+
     for index, row in df.iterrows():
         try:
             # Convert each row to a dictionary and then to a JSON string
             message = json.dumps(row.to_dict())
             producer.send(topic, value=message)
             print(f"Sent: {message}")
-            time.sleep(1)  # Wait for 1 second before sending the next message
+            time.sleep(1)
         except Exception as e:
             print(f"Error sending message at index {index}: {e}")
 
 # Send data from data_filtered DataFrame
-print("Starting to send messages...")
 send_messages_from_dataframe(data_filtered, topic_name)
 
 # Close the producer
 producer.close()
-print("Finished producing messages.")
+print("Finished producing")
