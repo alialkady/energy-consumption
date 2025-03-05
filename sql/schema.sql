@@ -5,8 +5,3 @@ use energy_consumption
         name VARCHAR(20),
         result DOUBLE
     )
-
-
-select * from report
-
-drop Table report
