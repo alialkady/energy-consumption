@@ -18,5 +18,5 @@ It's categorized according to different machines in the home.
 
 ## ETL Process
 
-![Image](kafka%20pipeline.jpg)
+![Image](kafkapipeline.jpg)
 
